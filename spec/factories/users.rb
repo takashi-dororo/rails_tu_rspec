@@ -1,33 +1,33 @@
 FactoryBot.define do
-  factory :michael do
+  factory :michael, class: User do
     name { 'Michael Example' }
     email { 'michael@example.com' }
     password { 'password' }
     password_digest { User.digest('password') }
   end
 
-  factory :archer do
+  factory :archer, class: User do
     name { 'Sterling Archer' }
     email { 'duchess@example.gov' }
     password { 'password' }
     password_digest { User.digest('password') }
   end
 
-  factory :lana do
+  factory :lana, class: User do
     name { 'Lana Kane' }
     email { 'hands@example.gov' }
     password { 'password' }
     password_digest { User.digest('password') }
   end
 
-  factory :malory do
+  factory :malory, class: User do
     name {'Malory Archer' }
     email  { 'boss@example.gov' }
     password { 'password' }
     password_digest { User.digest('password') }
   end
 
-  factory :user do
+  factory :user, class: User do
     sequence(:name) do |n|
       "User #{n}"
     end
