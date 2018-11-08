@@ -14,6 +14,12 @@ def log_in_as(user)
   session[:user_id] = user.id
 end
 
+def remember(user)
+  user.remember
+  cookies.permanent.signed[:user_id] = user.id
+  cookies.permanent[:remember_token] = user.remember_token
+end
+
 # テストユーザーとしてログインする remember_meをcheckした状態
 def log_in_with_remember(user, password: 'password', remember_me: '1')
   visit login_path
