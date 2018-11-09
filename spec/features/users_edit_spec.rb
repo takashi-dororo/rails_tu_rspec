@@ -17,10 +17,10 @@ RSpec.feature 'UserEdit', type: :feature do
         expect(page).to have_selector 'h1', text: 'Update your profile'
       end
     end
-    context 'when successful edit' do
+    context 'when successful edit with friendly forwarding' do
       before do
-        log_in_with_remember(user)
         visit edit_user_path(user)
+        log_in_with_remember(user)
       end
       scenario 'redirect to user' do
         expect(current_path).to eq edit_user_path(user)
@@ -31,6 +31,7 @@ RSpec.feature 'UserEdit', type: :feature do
         fill_in 'Password',     with: ''
         fill_in 'Confirmation', with: ''
         click_button 'Save changes'
+        expect(page).to have_selector '.alert'
         expect(current_path).to eq user_path(user)
         user.reload
         expect(user.name).to eq name
