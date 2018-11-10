@@ -2,14 +2,13 @@ require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
   let(:user) { FactoryBot.create(:michael) }
-  let(:other_user) { FactoryBot.create(:archer)}
-
+  let(:other_user) { FactoryBot.create(:archer) }
   describe 'Get #index' do
     context 'when not logged in' do
       it 'redirect to index' do
         get :index
         expect(response.status).to eq 302
-        expect(response).to redirect_to(login_url) 
+        expect(response).to redirect_to(login_url)
       end
     end
   end
@@ -59,6 +58,42 @@ RSpec.describe UsersController, type: :controller do
         patch :update, params: { id: user, user: FactoryBot.attributes_for(:user) }
         expect(flash).to be_empty
         expect(response).to redirect_to(root_url)
+      end
+    end
+  end
+
+  describe 'Delete destroy' do
+    context 'when not logged in' do
+      before do
+        delete :destroy, params: { id: user }
+      end
+      it 'redirect destroy' do
+        expect(response).to redirect_to(login_url)
+      end
+    end
+
+    context 'when logged in as a non-admin' do
+      let(:third) { FactoryBot.create(:lana) }
+      before do
+        log_in_as(other_user)
+        third
+      end
+      it 'is not reduce User count' do
+        expect(other_user.admin?).to_not be_truthy
+        delete :destroy, params: { id: third }
+        expect(response).to redirect_to(root_url)
+      end
+    end
+
+    context 'when logged in' do
+      let(:third) { FactoryBot.create(:lana) }
+      before do
+        log_in_as(user)
+        third
+      end
+      it 'reduce User count -1' do
+        delete :destroy, params: { id: third }
+        expect(response).to redirect_to(users_url)
       end
     end
   end

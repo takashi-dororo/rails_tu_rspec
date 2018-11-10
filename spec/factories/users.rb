@@ -4,6 +4,7 @@ FactoryBot.define do
     email { 'michael@example.com' }
     password { 'password' }
     password_digest { User.digest('password') }
+    admin true
   end
 
   factory :archer, class: User do
