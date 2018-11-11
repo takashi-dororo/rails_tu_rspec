@@ -81,13 +81,15 @@ RSpec.describe User, type: :model do
     expect(user).to be_invalid
   end
 
-  describe 'remember' do
+  describe 'authenticated' do
     context 'when a user with nil digest' do
       it 'return false authenticated?' do
         user = User.create(name: 'John', email: 'tester@example.com',
                     password: 'foobar', password_confirmation: 'foobar')
-        expect(user).to_not be_authenticated(:remember)
+        expect(user).to_not be_authenticated(:remember, '')
       end
     end
   end
+
+
 end

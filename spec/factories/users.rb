@@ -4,7 +4,9 @@ FactoryBot.define do
     email { 'michael@example.com' }
     password { 'password' }
     password_digest { User.digest('password') }
-    admin true
+    admin { true }
+    activated { true }
+    activated_at { Time.zone.now }
   end
 
   factory :archer, class: User do
@@ -12,6 +14,8 @@ FactoryBot.define do
     email { 'duchess@example.gov' }
     password { 'password' }
     password_digest { User.digest('password') }
+    activated { true }
+    activated_at { Time.zone.now }
   end
 
   factory :lana, class: User do
@@ -19,6 +23,8 @@ FactoryBot.define do
     email { 'hands@example.gov' }
     password { 'password' }
     password_digest { User.digest('password') }
+    activated { true }
+    activated_at { Time.zone.now }
   end
 
   factory :malory, class: User do
@@ -26,6 +32,8 @@ FactoryBot.define do
     email  { 'boss@example.gov' }
     password { 'password' }
     password_digest { User.digest('password') }
+    activated { true }
+    activated_at { Time.zone.now }
   end
 
   factory :user, class: User do
@@ -37,5 +45,7 @@ FactoryBot.define do
     end
     password { 'password' }
     password_digest { User.digest('password') }
+    activated { true }
+    activated_at { Time.zone.now }
   end
 end

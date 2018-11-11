@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.feature 'UsersLogin', type: :feature do
   describe 'Users login' do
-    let(:user) { User.create!(params) }
-    let(:params) { { name: 'michael', email: 'user@example.com', password: 'foobar' } }
+    let(:user) { FactoryBot.create(:michael) }
+    # let(:params) { { name: 'michael', email: 'user@example.com', password: 'foobar' } }
 
     context 'when login with valid information followed by logout' do
       scenario 'login changes layouts' do
