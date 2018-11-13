@@ -118,4 +118,27 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'status feed' do
+    let(:michael) { FactoryBot.create(:michael) }
+    let(:archer) { FactoryBot.create(:archer) }
+    let(:lana) { FactoryBot.create(:lana) }
+    before do
+      michael.follow(lana)
+    end
+     it 'has the right post' do
+       # フォローしているユーザーの投稿を確認
+       lana.microposts.each do |post_following|
+         expect(michael.feed.include?(post_following)).to be_truthy
+       end
+       # 自分自身の投稿を確認
+       michael.microposts.each do |post_self|
+         expect(michael.feed.include?(post_self)).to be_truthy
+       end
+       # フォローしていないユーザーの投稿を確認
+       archer.microposts.each do |post_unfollowd|
+         expect(michael.feed.include?(post_unfollowed)).to_not be_truthy
+       end
+     end
+  end
 end
