@@ -91,5 +91,15 @@ RSpec.describe User, type: :model do
     end
   end
 
-
+  describe 'associated microposts' do
+    context 'when user id delete' do
+      user = User.new(name: 'Exmple User', email: 'user@example.com',
+                     password: 'foobar', password_confirmation: 'foobar')
+      it 'is destroyed with microposts' do
+        user.save
+        user.microposts.create!(content: 'Lorem ipsum')
+        expect{ user.destroy }.to change { Micropost.count }.by(-1)
+      end
+    end
+  end
 end
