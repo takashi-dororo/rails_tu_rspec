@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Micropost, type: :model do
@@ -34,5 +36,4 @@ RSpec.describe Micropost, type: :model do
   #     expect(most_recent).to eq Micropost.first
   #   end
   # end
-
 end

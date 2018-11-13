@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
@@ -98,4 +100,23 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
+  describe 'follow and followed permit' do
+    context 'when not logged in' do
+      before do
+        get :following, params: { id: user }
+      end
+      it 'redirect following' do
+        expect(response).to redirect_to login_url
+      end
+    end
+
+    context 'when not logged in' do
+      before do
+        get :followers, params: { id: user }
+      end
+      it 'redirect followers' do
+        expect(response).to redirect_to login_url
+      end
+    end
+  end
 end

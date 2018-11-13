@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :michael, class: User do
     name { 'Michael Example' }
@@ -28,8 +30,8 @@ FactoryBot.define do
   end
 
   factory :malory, class: User do
-    name {'Malory Archer' }
-    email  { 'boss@example.gov' }
+    name { 'Malory Archer' }
+    email { 'boss@example.gov' }
     password { 'password' }
     password_digest { User.digest('password') }
     activated { true }

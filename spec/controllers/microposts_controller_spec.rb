@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe MicropostsController, type: :controller do
@@ -6,14 +8,14 @@ RSpec.describe MicropostsController, type: :controller do
 
   context 'when not logged in' do
     it 'redirect create' do
-      expect{ post :create, params: { micropost: { content: 'Lorem ipsum' } } }.to_not change { Micropost.count }
+      expect { post :create, params: { micropost: { content: 'Lorem ipsum' } } }.to_not change { Micropost.count }
       expect(response).to redirect_to login_url
     end
     before do
       micropost
     end
     it 'redirect destroy' do
-      expect{ delete :destroy, params: { id: micropost } }.to_not change { Micropost.count }
+      expect { delete :destroy, params: { id: micropost } }.to_not change { Micropost.count }
       expect(response).to redirect_to login_url
     end
   end
@@ -24,7 +26,7 @@ RSpec.describe MicropostsController, type: :controller do
       micropost
     end
     it 'redirect destroy' do
-      expect { delete :destroy, params: { id: micropost } }.to_not change { Micropost.count}
+      expect { delete :destroy, params: { id: micropost } }.to_not change { Micropost.count }
       expect(response).to redirect_to root_url
     end
   end

@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.feature 'UsersProfile', type: :feature do
-  include ApplicationHelper #いるのか？
-  let(:user){ FactoryBot.create(:user) }
+  include ApplicationHelper # いるのか？
+  let(:user) { FactoryBot.create(:user) }
   context 'when show user page' do
     before do
       visit user_path(user)

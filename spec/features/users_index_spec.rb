@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.feature 'UsersIndex', type: :feature do
   let(:admin) { FactoryBot.create(:michael) }
-  let(:non_admin) { FactoryBot.create(:archer)}
+  let(:non_admin) { FactoryBot.create(:archer) }
 
   describe 'User index' do
     before do

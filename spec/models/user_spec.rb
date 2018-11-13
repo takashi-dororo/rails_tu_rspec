@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-
   it 'has a valid factory' do
     expect(FactoryBot.build(:user)).to be_valid
   end
@@ -85,7 +86,7 @@ RSpec.describe User, type: :model do
     context 'when a user with nil digest' do
       it 'return false authenticated?' do
         user = User.create(name: 'John', email: 'tester@example.com',
-                    password: 'foobar', password_confirmation: 'foobar')
+                           password: 'foobar', password_confirmation: 'foobar')
         expect(user).to_not be_authenticated(:remember, '')
       end
     end
@@ -94,11 +95,26 @@ RSpec.describe User, type: :model do
   describe 'associated microposts' do
     context 'when user id delete' do
       user = User.new(name: 'Exmple User', email: 'user@example.com',
-                     password: 'foobar', password_confirmation: 'foobar')
+                      password: 'foobar', password_confirmation: 'foobar')
       it 'is destroyed with microposts' do
         user.save
         user.microposts.create!(content: 'Lorem ipsum')
-        expect{ user.destroy }.to change { Micropost.count }.by(-1)
+        expect { user.destroy }.to change { Micropost.count }.by(-1)
+      end
+    end
+  end
+
+  describe 'follow and follwer' do
+    let(:michael) { FactoryBot.create(:michael) }
+    let(:archer) { FactoryBot.create(:archer) }
+    context 'when a user following' do
+      it 'user follow other' do
+        expect(michael.following?(archer)).to be_falsey
+        michael.follow(archer)
+        expect(michael.following?(archer)).to be_truthy
+        expect(archer.followers.include?(michael)).to be_truthy
+        michael.unfollow(archer)
+        expect(michael.following?(archer)).to be_falsey
       end
     end
   end

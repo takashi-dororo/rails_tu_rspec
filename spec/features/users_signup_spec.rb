@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.feature 'UsersSignup', type: :feature do
@@ -38,7 +40,6 @@ RSpec.feature 'UsersSignup', type: :feature do
         expect(page).to have_selector 'h1', text: user.name
         expect(logged_on?(user)).to be_truthy
       end
-
     end
 
     context 'when invalid signup information' do
