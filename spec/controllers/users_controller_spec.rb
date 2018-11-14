@@ -9,7 +9,7 @@ RSpec.describe UsersController, type: :controller do
     context 'when not logged in' do
       it 'redirect to index' do
         get :index
-        expect(response.status).to eq 302
+        # expect(response.status).to eq 302
         expect(response).to redirect_to(login_url)
       end
     end

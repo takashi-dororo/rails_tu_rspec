@@ -53,7 +53,7 @@ RSpec.feature 'UsersLogin', type: :feature do
       end
 
       scenario 'is remembering' do
-        expect(Capybara.current_session.driver.request.cookies.[]('remember_token')).to eq(nil)
+        expect(Capybara.current_session.driver.request.cookies.[]('remember_token')).to be_truthy
       end
     end
 
@@ -63,7 +63,7 @@ RSpec.feature 'UsersLogin', type: :feature do
       end
 
       scenario 'is not remembering' do
-        expect(Capybara.current_session.driver.request.cookies.[]('remember_token')).to eq(nil)
+        expect(Capybara.current_session.driver.request.cookies.[]('remember_token')).to be_blank
       end
     end
   end

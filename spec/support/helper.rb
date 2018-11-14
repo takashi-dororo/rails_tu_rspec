@@ -28,6 +28,6 @@ def log_in_with_remember(user, password: 'password', remember_me: '1')
   fill_in 'Email', with: user.email
   fill_in 'Password', with: user.password
   # expect(page).to have_checked_field("Remember me on this computer")
-  check 'Remember me on this computer' if remember_me == 1
-  click_on 'Log in!'
+  check 'Remember me on this computer' if remember_me == '1'
+  click_on 'Log in!!'
 end
